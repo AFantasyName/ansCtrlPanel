@@ -123,18 +123,47 @@
     
             let chartlayout = { xaxis:{
          title: 'Time in s'
+                  },
+         legend: {
+         y: 0.5,
+         traceorder: 'reversed',
+         font: {size: 16},
+         yref: 'paper'
                   }
                 };
+      //projected water level
+            var projwl = {
+              x:[1,2,3,4],
+              y:[null],
+              mode: 'lines+markers',
+              line: {shape: 'hv'},
+              type: 'scatter'
+            };
+      //actual water level
+            var actuwl = {
+              y:[null],
+              type:'line'
+            };
+            var datawl = [projwl, actuwl];
             Plotly.plot('wlchart',[{
-                y:[null],
-                type:'line'
-                
+                datawl,
             }], chartlayout);
-    
+      //projected detector height
+            var projdh = {
+              x:[1,2,3,4],
+              y:[null],
+              mode: 'lines+markers',
+              line: {shape: 'hv'},
+              type: 'scatter'
+            };
+      //actual detector height
+            var actudh = {
+              y:[null],
+              type:'line'
+            };
+            var datadh = [projdh, actudh];
             Plotly.plot('dhchart',[{
-                y:[null],
-                type:'line'
-                
+                datadh
             }], chartlayout);
     
             socket.on('wlupdate', function(msg){
